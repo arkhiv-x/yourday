@@ -44,6 +44,7 @@
       max-width: 90%;
       border-radius: 15px;
       margin-top: 15px;
+      box-shadow: 0 0 15px rgba(255,255,255,0.3);
     }
 
     .hud {
@@ -59,7 +60,7 @@
 
 <!-- TELA INICIAL -->
 <div class="tela ativa" id="inicio">
-  <h1>🎮 Missão: Amor Infinito</h1>
+  <h1>🎮 TRANSFORLOVE</h1>
   <p>Soldado Pedro, você está pronto?</p>
   <button onclick="irPara('fase1')">Iniciar Missão</button>
 </div>
@@ -67,56 +68,91 @@
 <!-- FASE 1 -->
 <div class="tela" id="fase1">
   <div class="hud">❤️ Vida: 100 | 💖 Amor: +1000</div>
+
   <h2>Fase 1 — O Começo</h2>
+
   <p>"Desde o primeiro momento, eu te desejo."</p>
+
   <button onclick="irPara('fase2')">Próxima Missão</button>
 </div>
 
 <!-- FASE 2 -->
 <div class="tela" id="fase2">
-  <div class="hud">🔥 Resistência: MAX</div>
-  <h2>Fase 2 — Juntos é Mais Forte</h2>
-  <p>"Mesmo nos dias difíceis, você esteve aqui"</p>
+  <div class="hud">🏆 Conquista: Estilo Desbloqueado 😎</div>
+
+  <h2>Fase 2 — Skin Rara</h2>
+
+  <p>"Pedro Estiloso Ativado"</p>
+
+  <img src="fotos/oculos.jpg" alt="Pedro estiloso">
+
+  <p>✨ Carisma +100</p>
+
   <button onclick="irPara('fase3')">Continuar</button>
 </div>
 
 <!-- FASE 3 -->
 <div class="tela" id="fase3">
-  <div class="hud">🐱 Companheiros Ativos</div>
-  <h2>Fase 3 — Guardiões</h2>
-  <p>Proteja Tem, Sol e Byte!</p>
+  <div class="hud">🏆 Conquista: Força Máxima 💪</div>
+
+  <h2>Fase 3 — Modo Forte</h2>
+
+  <p>"Nada me derruba quando você tá comigo"</p>
+
+  <img src="fotos/biceps.jpg" alt="Pedro forte">
+
+  <p>🔥 Resistência +200</p>
+
   <button onclick="irPara('fase4')">Avançar</button>
 </div>
 
 <!-- FASE 4 -->
 <div class="tela" id="fase4">
-  <div class="hud">🎖️ Modo Guerreiro</div>
-  <h2>Fase 4 — O Guerreiro</h2>
-  <p>"Mesmo cansado, você volta para casa."</p>
+  <div class="hud">🏆 Conquista: Gamer Supremo 🕶️</div>
+
+  <h2>Fase 4 — Pixel Mode</h2>
+
+  <p>"Com você, tudo vira diversão"</p>
+
+  <img src="fotos/pixel.jpg" alt="Pedro gamer">
+
+  <p>🎮 Felicidade +999</p>
+
   <button onclick="irPara('final')">Última Missão</button>
 </div>
 
 <!-- FINAL -->
 <div class="tela" id="final">
+
   <h1>🏆 Missão Concluída</h1>
   <h2>Amor Infinito</h2>
+
   <p>
     Amor,<br><br>
+
     Obrigada por estar comigo nos piores e melhores momentos.<br>
     Você é meu orgulho, minha casa, meu melhor amigo.<br><br>
-    Meus parabéns e feliz aniversário 💖<br>
-    
+
+    Meus parabéns e feliz aniversário 💖<br><br>
+
     — V.P.S 😎
   </p>
 
-  <button onclick="alert('Eu te amo pra sempre 💕')">💌 Mensagem Secreta</button>
+  <button onclick="mostrarMensagem()">💌 Mensagem Secreta</button>
+
 </div>
 
 <script>
+
 function irPara(id) {
   document.querySelectorAll('.tela').forEach(t => t.classList.remove('ativa'));
   document.getElementById(id).classList.add('ativa');
 }
+
+function mostrarMensagem() {
+  alert("Eu te amo para sempre ❤️‍🩹");
+}
+
 </script>
 
 </body>
