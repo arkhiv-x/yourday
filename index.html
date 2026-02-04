@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>TRANSFORLOVE 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(#0f2027, #203a43, #2c5364);
+      color: white;
+      text-align: center;
+    }
+
+    .tela {
+      display: none;
+      min-height: 100vh;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .ativa {
+      display: block;
+    }
+
+    button {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 10px;
+      background: #ff5ca8;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background: #ff2f92;
+    }
+
+    img {
+      max-width: 90%;
+      border-radius: 15px;
+      margin-top: 15px;
+    }
+
+    .hud {
+      background: rgba(0,0,0,0.5);
+      padding: 10px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- TELA INICIAL -->
+<div class="tela ativa" id="inicio">
+  <h1>🎮 Missão: Amor Infinito</h1>
+  <p>Soldado Pedro, você está pronto?</p>
+  <button onclick="irPara('fase1')">Iniciar Missão</button>
+</div>
+
+<!-- FASE 1 -->
+<div class="tela" id="fase1">
+  <div class="hud">❤️ Vida: 100 | 💖 Amor: +1000</div>
+  <h2>Fase 1 — O Começo</h2>
+  <p>"Desde o primeiro momento, eu te desejo."</p>
+  <button onclick="irPara('fase2')">Próxima Missão</button>
+</div>
+
+<!-- FASE 2 -->
+<div class="tela" id="fase2">
+  <div class="hud">🔥 Resistência: MAX</div>
+  <h2>Fase 2 — Juntos é Mais Forte</h2>
+  <p>"Mesmo nos dias difíceis, você esteve aqui"</p>
+  <button onclick="irPara('fase3')">Continuar</button>
+</div>
+
+<!-- FASE 3 -->
+<div class="tela" id="fase3">
+  <div class="hud">🐱 Companheiros Ativos</div>
+  <h2>Fase 3 — Guardiões</h2>
+  <p>Proteja Tem, Sol e Byte!</p>
+  <button onclick="irPara('fase4')">Avançar</button>
+</div>
+
+<!-- FASE 4 -->
+<div class="tela" id="fase4">
+  <div class="hud">🎖️ Modo Guerreiro</div>
+  <h2>Fase 4 — O Guerreiro</h2>
+  <p>"Mesmo cansado, você volta para casa."</p>
+  <button onclick="irPara('final')">Última Missão</button>
+</div>
+
+<!-- FINAL -->
+<div class="tela" id="final">
+  <h1>🏆 Missão Concluída</h1>
+  <h2>Amor Infinito</h2>
+  <p>
+    Amor,<br><br>
+    Obrigada por estar comigo nos piores e melhores momentos.<br>
+    Você é meu orgulho, minha casa, meu melhor amigo.<br><br>
+    Meus parabéns e feliz aniversário 💖<br>
+    
+    — V.P.S 😎
+  </p>
+
+  <button onclick="alert('Eu te amo pra sempre 💕')">💌 Mensagem Secreta</button>
+</div>
+
+<script>
+function irPara(id) {
+  document.querySelectorAll('.tela').forEach(t => t.classList.remove('ativa'));
+  document.getElementById(id).classList.add('ativa');
+}
+</script>
+
+</body>
+</html>
