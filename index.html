@@ -10,7 +10,7 @@
 body{
 margin:0;
 font-family:Arial;
-background:#08141f;
+background:#050d14;
 color:white;
 text-align:center;
 }
@@ -20,7 +20,7 @@ text-align:center;
 .tela{
 display:none;
 min-height:100vh;
-padding:15px;
+padding:10px;
 box-sizing:border-box;
 }
 
@@ -34,56 +34,55 @@ border:none;
 border-radius:12px;
 background:#ff5ca8;
 color:white;
-font-size:18px;
-margin-top:15px;
+font-size:17px;
+margin-top:12px;
 }
 
-/* JOGO */
+/* HUD */
+
+.hud{
+background:rgba(0,0,0,0.6);
+padding:8px;
+border-radius:10px;
+margin-bottom:5px;
+font-size:14px;
+}
+
+/* MAPA */
 
 #gameBox{
-width:90%;
-max-width:360px;
-height:480px;
-background:#111;
+width:95%;
+max-width:400px;
+height:75vh;
+max-height:520px;
 margin:10px auto;
 border-radius:15px;
 border:2px solid #fff;
+background:url("fundo1.png") center/cover no-repeat;
 position:relative;
 overflow:hidden;
 }
 
-/* RATINHO */
+/* PERSONAGEM */
 
 #mouse{
-width:28px;
-height:28px;
-background:#ccc;
-border-radius:50%;
+width:40px;
+height:40px;
+background:url("ratinho.png") center/contain no-repeat;
 position:absolute;
-bottom:15px;
+bottom:10px;
 left:50%;
 transform:translateX(-50%);
-}
-
-/* CAPACETE */
-
-#mouse:after{
-content:"🎖️";
-font-size:14px;
-position:absolute;
-top:-10px;
-left:6px;
 }
 
 /* OBJETIVO */
 
 #goal{
-width:30px;
-height:30px;
-background:pink;
-border-radius:50%;
+width:34px;
+height:34px;
+background:url("coracao.png") center/contain no-repeat;
 position:absolute;
-top:10px;
+top:8px;
 left:50%;
 transform:translateX(-50%);
 }
@@ -92,10 +91,9 @@ transform:translateX(-50%);
 
 .obst{
 width:50px;
-height:18px;
-background:crimson;
+height:20px;
+background:url("obstaculo.png") center/contain no-repeat;
 position:absolute;
-border-radius:6px;
 }
 
 /* CONTROLES */
@@ -103,18 +101,19 @@ border-radius:6px;
 #controls{
 display:flex;
 justify-content:center;
-gap:20px;
-margin-top:10px;
+gap:25px;
+margin-top:8px;
 }
 
 .ctrl{
-width:55px;
-height:55px;
-background:#222;
+width:60px;
+height:60px;
+background:#0c1b27;
 border:2px solid #fff;
 border-radius:50%;
-font-size:24px;
-line-height:50px;
+font-size:26px;
+line-height:56px;
+user-select:none;
 }
 
 </style>
@@ -126,17 +125,19 @@ line-height:50px;
 <div class="tela ativa" id="inicio">
 
 <h1>🎮 TRANSFORLOVE</h1>
-<p>Missão iniciada, soldado Pedro 💖</p>
 
-<button onclick="irPara('fase1')">Começar</button>
+<p>Campo de treinamento militar 💖</p>
+
+<button onclick="irPara('fase1')">Iniciar Missão</button>
 
 </div>
 
 <!-- FASE 1 -->
 <div class="tela" id="fase1">
 
-<h2>🐭 Treinamento</h2>
-<p>Chegue no ❤️ usando os botões</p>
+<div class="hud">🐭 Treinamento Básico</div>
+
+<p>Chegue no ❤️ sem bater</p>
 
 <div id="gameBox">
 
@@ -144,25 +145,24 @@ line-height:50px;
 
 <div id="goal"></div>
 
-<div class="obst" style="top:140px;left:40px"></div>
-<div class="obst" style="top:220px;left:200px"></div>
-<div class="obst" style="top:300px;left:100px"></div>
+<div class="obst" style="top:160px;left:50px"></div>
+<div class="obst" style="top:260px;left:230px"></div>
+<div class="obst" style="top:340px;left:120px"></div>
 
 </div>
 
-<!-- CONTROLES -->
 <div id="controls">
 
-<div class="ctrl" ontouchstart="moveLeft()">⬅️</div>
-<div class="ctrl" ontouchstart="moveUp()">⬆️</div>
-<div class="ctrl" ontouchstart="moveRight()">➡️</div>
+<div class="ctrl" ontouchstart="left()">◀</div>
+<div class="ctrl" ontouchstart="up()">▲</div>
+<div class="ctrl" ontouchstart="right()">▶</div>
 
 </div>
 
 <p id="msg"></p>
 
 <button id="nextBtn" style="display:none"
-onclick="irPara('fase2')">Próxima</button>
+onclick="irPara('fase2')">Continuar</button>
 
 </div>
 
@@ -171,11 +171,11 @@ onclick="irPara('fase2')">Próxima</button>
 
 <h2>😎 Skin Rara</h2>
 
-<img src="oculos.jpg">
+<img src="oculos.jpg" style="max-width:65%">
 
 <p>Carisma +100</p>
 
-<button onclick="irPara('fase3')">Continuar</button>
+<button onclick="abrirPresente('fase3')">🎁 Abrir Presente</button>
 
 </div>
 
@@ -184,7 +184,7 @@ onclick="irPara('fase2')">Próxima</button>
 
 <h2>💪 Força Máxima</h2>
 
-<img src="biceps.jpg">
+<img src="biceps.jpg" style="max-width:65%">
 
 <p>Resistência +200</p>
 
@@ -197,7 +197,7 @@ onclick="irPara('fase2')">Próxima</button>
 
 <h2>🕶️ Gamer Supremo</h2>
 
-<img src="pixel.jpg">
+<img src="pixel.jpg" style="max-width:65%">
 
 <p>Felicidade +999</p>
 
@@ -208,25 +208,24 @@ onclick="irPara('fase2')">Próxima</button>
 <!-- FINAL -->
 <div class="tela" id="final">
 
-<h1>🏆 Missão Completa</h1>
+<h1>🏆 Missão Concluída</h1>
 
 <p>
-Amor, eu te amo pra sempre 💖<br>
+Pedro, você é meu herói.<br>
+Te amo pra sempre 💖<br><br>
+
 — Vitória
 </p>
 
-<button onclick="alert('Você é meu herói 🐭❤️')">💌</button>
+<button onclick="alert('Sempre vou lutar ao seu lado 🐭❤️')">💌</button>
 
 </div>
 
 <script>
 
-/* CONTROLE */
-
-let x=160;
+let x=170;
 let y=430;
-
-const speed=15;
+const speed=18;
 
 let mouse=null;
 
@@ -247,33 +246,22 @@ function init(){
 
 mouse=document.getElementById("mouse");
 
-x=160;
+x=170;
 y=430;
 
 update();
 }
 
-function moveLeft(){
-x-=speed;
-update();
-}
-
-function moveRight(){
-x+=speed;
-update();
-}
-
-function moveUp(){
-y-=speed;
-update();
-}
+function left(){x-=speed;update();}
+function right(){x+=speed;update();}
+function up(){y-=speed;update();}
 
 function update(){
 
 if(x<0)x=0;
-if(x>330)x=330;
+if(x>360)x=360;
 if(y<0)y=0;
-if(y>450)y=450;
+if(y>480)y=480;
 
 mouse.style.left=x+"px";
 mouse.style.top=y+"px";
@@ -309,20 +297,27 @@ win();
 
 function reset(){
 
-x=160;
+x=170;
 y=430;
 
 document.getElementById("msg")
-.innerText="❌ Desviou errado! Tenta de novo 💖";
+.innerText="❌ Tenta de novo, soldado!";
 }
 
 function win(){
 
 document.getElementById("msg")
-.innerText="🏆 Missão completa!";
+.innerText="🏆 Treinamento concluído!";
 
 document.getElementById("nextBtn")
 .style.display="inline-block";
+}
+
+function abrirPresente(fase){
+
+alert("🎁 Presente desbloqueado!");
+
+irPara(fase);
 }
 
 </script>
