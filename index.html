@@ -1,310 +1,328 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>TRANSFORLOVE 💖</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>TRANSFORLOVE 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(#0f2027, #203a43, #2c5364);
-      color: white;
-      text-align: center;
-    }
+<style>
 
-    .tela {
-      display: none;
-      min-height: 100vh;
-      padding: 20px;
-      box-sizing: border-box;
-    }
+body{
+margin:0;
+font-family:Arial;
+background:#08141f;
+color:white;
+text-align:center;
+}
 
-    .ativa {
-      display: block;
-    }
+/* TELAS */
 
-    button {
-      padding: 12px 20px;
-      border: none;
-      border-radius: 10px;
-      background: #ff5ca8;
-      color: white;
-      font-size: 18px;
-      cursor: pointer;
-      margin-top: 20px;
-    }
+.tela{
+display:none;
+min-height:100vh;
+padding:15px;
+box-sizing:border-box;
+}
 
-    button:hover {
-      background: #ff2f92;
-    }
+.ativa{display:block}
 
-    img {
-      max-width: 90%;
-      border-radius: 15px;
-      margin-top: 15px;
-      box-shadow: 0 0 15px rgba(255,255,255,0.3);
-    }
+/* BOTÕES */
 
-    .hud {
-      background: rgba(0,0,0,0.5);
-      padding: 10px;
-      border-radius: 10px;
-      margin-bottom: 15px;
-    }
+button{
+padding:12px 20px;
+border:none;
+border-radius:12px;
+background:#ff5ca8;
+color:white;
+font-size:18px;
+margin-top:15px;
+}
 
-    /* AREA DO JOGO */
+/* JOGO */
 
-    #gameArea {
-      width: 320px;
-      height: 400px;
-      background: #111;
-      margin: 20px auto;
-      position: relative;
-      border-radius: 15px;
-      border: 2px solid white;
-      overflow: hidden;
-    }
+#gameBox{
+width:90%;
+max-width:360px;
+height:480px;
+background:#111;
+margin:10px auto;
+border-radius:15px;
+border:2px solid #fff;
+position:relative;
+overflow:hidden;
+}
 
-    #mouse {
-      position: absolute;
-      font-size: 28px;
-      left: 10px;
-      top: 180px;
-    }
+/* RATINHO */
 
-    #goal {
-      position: absolute;
-      right: 10px;
-      top: 180px;
-      font-size: 26px;
-    }
+#mouse{
+width:28px;
+height:28px;
+background:#ccc;
+border-radius:50%;
+position:absolute;
+bottom:15px;
+left:50%;
+transform:translateX(-50%);
+}
 
-    .obstaculo {
-      width: 40px;
-      height: 40px;
-      background: crimson;
-      position: absolute;
-      border-radius: 8px;
-    }
-  </style>
+/* CAPACETE */
+
+#mouse:after{
+content:"🎖️";
+font-size:14px;
+position:absolute;
+top:-10px;
+left:6px;
+}
+
+/* OBJETIVO */
+
+#goal{
+width:30px;
+height:30px;
+background:pink;
+border-radius:50%;
+position:absolute;
+top:10px;
+left:50%;
+transform:translateX(-50%);
+}
+
+/* OBSTACULOS */
+
+.obst{
+width:50px;
+height:18px;
+background:crimson;
+position:absolute;
+border-radius:6px;
+}
+
+/* CONTROLES */
+
+#controls{
+display:flex;
+justify-content:center;
+gap:20px;
+margin-top:10px;
+}
+
+.ctrl{
+width:55px;
+height:55px;
+background:#222;
+border:2px solid #fff;
+border-radius:50%;
+font-size:24px;
+line-height:50px;
+}
+
+</style>
 </head>
 
 <body>
 
-<!-- TELA INICIAL -->
+<!-- INICIO -->
 <div class="tela ativa" id="inicio">
-  <h1>🎮 TRANSFORLOVE</h1>
-  <p>Soldado Pedro, você está pronto?</p>
-  <button onclick="irPara('fase1')">Iniciar Missão</button>
+
+<h1>🎮 TRANSFORLOVE</h1>
+<p>Missão iniciada, soldado Pedro 💖</p>
+
+<button onclick="irPara('fase1')">Começar</button>
+
 </div>
 
-<!-- FASE 1 - JOGO -->
+<!-- FASE 1 -->
 <div class="tela" id="fase1">
 
-  <h2>🐭 Fase 1 — Treinamento</h2>
-  <p>Leve o ratinho até o ❤️ sem bater!</p>
+<h2>🐭 Treinamento</h2>
+<p>Chegue no ❤️ usando os botões</p>
 
-  <div id="gameArea">
+<div id="gameBox">
 
-    <div id="mouse">🐭🎖️</div>
+<div id="mouse"></div>
 
-    <div class="obstaculo" style="top:120px; left:80px;"></div>
-    <div class="obstaculo" style="top:220px; left:200px;"></div>
-    <div class="obstaculo" style="top:80px; left:260px;"></div>
+<div id="goal"></div>
 
-    <div id="goal">❤️</div>
+<div class="obst" style="top:140px;left:40px"></div>
+<div class="obst" style="top:220px;left:200px"></div>
+<div class="obst" style="top:300px;left:100px"></div>
 
-  </div>
+</div>
 
-  <p id="status"></p>
+<!-- CONTROLES -->
+<div id="controls">
 
-  <button onclick="irPara('fase2')" id="btnNext" style="display:none;">
-    Próxima Missão
-  </button>
+<div class="ctrl" ontouchstart="moveLeft()">⬅️</div>
+<div class="ctrl" ontouchstart="moveUp()">⬆️</div>
+<div class="ctrl" ontouchstart="moveRight()">➡️</div>
+
+</div>
+
+<p id="msg"></p>
+
+<button id="nextBtn" style="display:none"
+onclick="irPara('fase2')">Próxima</button>
 
 </div>
 
 <!-- FASE 2 -->
 <div class="tela" id="fase2">
-  <div class="hud">🏆 Conquista: Estilo Desbloqueado 😎</div>
 
-  <h2>Fase 2 — Skin Rara</h2>
+<h2>😎 Skin Rara</h2>
 
-  <p>"Pedro Estiloso Ativado"</p>
+<img src="oculos.jpg">
 
-  <img src="oculos.jpg">
+<p>Carisma +100</p>
 
-  <p>✨ Carisma +100</p>
+<button onclick="irPara('fase3')">Continuar</button>
 
-  <button onclick="irPara('fase3')">Continuar</button>
 </div>
 
 <!-- FASE 3 -->
 <div class="tela" id="fase3">
-  <div class="hud">🏆 Conquista: Força Máxima 💪</div>
 
-  <h2>Fase 3 — Modo Forte</h2>
+<h2>💪 Força Máxima</h2>
 
-  <p>"Nada me derruba quando você tá comigo"</p>
+<img src="biceps.jpg">
 
-  <img src="biceps.jpg">
+<p>Resistência +200</p>
 
-  <p>🔥 Resistência +200</p>
+<button onclick="irPara('fase4')">Avançar</button>
 
-  <button onclick="irPara('fase4')">Avançar</button>
 </div>
 
 <!-- FASE 4 -->
 <div class="tela" id="fase4">
-  <div class="hud">🏆 Conquista: Gamer Supremo 🕶️</div>
 
-  <h2>Fase 4 — Pixel Mode</h2>
+<h2>🕶️ Gamer Supremo</h2>
 
-  <p>"Com você, tudo vira diversão"</p>
+<img src="pixel.jpg">
 
-  <img src="pixel.jpg">
+<p>Felicidade +999</p>
 
-  <p>🎮 Felicidade +999</p>
+<button onclick="irPara('final')">Final</button>
 
-  <button onclick="irPara('final')">Última Missão</button>
 </div>
 
 <!-- FINAL -->
 <div class="tela" id="final">
 
-  <h1>🏆 Missão Concluída</h1>
-  <h2>Amor Infinito</h2>
+<h1>🏆 Missão Completa</h1>
 
-  <p>
-    Amor,<br><br>
+<p>
+Amor, eu te amo pra sempre 💖<br>
+— Vitória
+</p>
 
-    Obrigada por estar comigo nos piores e melhores momentos.<br>
-    Você é meu orgulho, minha casa, meu melhor amigo.<br><br>
-
-    Meus parabéns e feliz aniversário 💖<br><br>
-
-    — V.P.S 😎
-  </p>
-
-  <button onclick="mostrarMensagem()">💌 Mensagem Secreta</button>
+<button onclick="alert('Você é meu herói 🐭❤️')">💌</button>
 
 </div>
 
 <script>
 
-let mouse = null;
-let posX = 10;
-let posY = 180;
+/* CONTROLE */
 
-document.addEventListener("keydown", mover);
-document.addEventListener("touchstart", tocarTela);
+let x=160;
+let y=430;
 
-function irPara(id) {
+const speed=15;
 
-  document.querySelectorAll('.tela')
-    .forEach(t => t.classList.remove('ativa'));
+let mouse=null;
 
-  document.getElementById(id)
-    .classList.add('ativa');
+function irPara(id){
 
-  if (id === "fase1") {
-    setTimeout(iniciarJogo, 200);
-  }
+document.querySelectorAll('.tela')
+.forEach(t=>t.classList.remove('ativa'));
+
+document.getElementById(id)
+.classList.add('ativa');
+
+if(id==="fase1"){
+setTimeout(init,200);
+}
 }
 
-function iniciarJogo() {
-  mouse = document.getElementById("mouse");
-  posX = 10;
-  posY = 180;
-  atualizar();
+function init(){
+
+mouse=document.getElementById("mouse");
+
+x=160;
+y=430;
+
+update();
 }
 
-function mover(e) {
-
-  if (!mouse) return;
-
-  if (e.key === "ArrowUp") posY -= 15;
-  if (e.key === "ArrowDown") posY += 15;
-  if (e.key === "ArrowLeft") posX -= 15;
-  if (e.key === "ArrowRight") posX += 15;
-
-  atualizar();
+function moveLeft(){
+x-=speed;
+update();
 }
 
-function tocarTela(e) {
-
-  if (!mouse) return;
-
-  let y = e.touches[0].clientY;
-
-  if (y < window.innerHeight / 2) {
-    posY -= 20;
-  } else {
-    posY += 20;
-  }
-
-  posX += 15;
-
-  atualizar();
+function moveRight(){
+x+=speed;
+update();
 }
 
-function atualizar() {
-
-  mouse.style.left = posX + "px";
-  mouse.style.top = posY + "px";
-
-  verificarColisao();
+function moveUp(){
+y-=speed;
+update();
 }
 
-function verificarColisao() {
+function update(){
 
-  let mouseRect = mouse.getBoundingClientRect();
-  let goal = document.getElementById("goal");
-  let goalRect = goal.getBoundingClientRect();
+if(x<0)x=0;
+if(x>330)x=330;
+if(y<0)y=0;
+if(y>450)y=450;
 
-  let obstaculos = document.querySelectorAll(".obstaculo");
+mouse.style.left=x+"px";
+mouse.style.top=y+"px";
 
-  obstaculos.forEach(obs => {
-
-    let r = obs.getBoundingClientRect();
-
-    if (
-      mouseRect.right > r.left &&
-      mouseRect.left < r.right &&
-      mouseRect.bottom > r.top &&
-      mouseRect.top < r.bottom
-    ) {
-      resetar();
-    }
-
-  });
-
-  if (mouseRect.right > goalRect.left) {
-    venceu();
-  }
+check();
 }
 
-function resetar() {
+function check(){
 
-  posX = 10;
-  posY = 180;
+const m=mouse.getBoundingClientRect();
+const g=document.getElementById("goal").getBoundingClientRect();
 
-  document.getElementById("status").innerText =
-    "❌ Opa! Tenta de novo, soldado!";
+document.querySelectorAll(".obst").forEach(o=>{
+
+const r=o.getBoundingClientRect();
+
+if(
+m.right>r.left &&
+m.left<r.right &&
+m.bottom>r.top &&
+m.top<r.bottom
+){
+reset();
 }
 
-function venceu() {
+});
 
-  document.getElementById("status").innerText =
-    "🏆 Treinamento completo!";
-
-  document.getElementById("btnNext").style.display = "inline-block";
+if(m.top<g.bottom){
+win();
 }
 
-function mostrarMensagem() {
-  alert("Eu te amo para sempre ❤️‍🩹");
+}
+
+function reset(){
+
+x=160;
+y=430;
+
+document.getElementById("msg")
+.innerText="❌ Desviou errado! Tenta de novo 💖";
+}
+
+function win(){
+
+document.getElementById("msg")
+.innerText="🏆 Missão completa!";
+
+document.getElementById("nextBtn")
+.style.display="inline-block";
 }
 
 </script>
