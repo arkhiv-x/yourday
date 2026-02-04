@@ -53,6 +53,41 @@
       border-radius: 10px;
       margin-bottom: 15px;
     }
+
+    /* AREA DO JOGO */
+
+    #gameArea {
+      width: 320px;
+      height: 400px;
+      background: #111;
+      margin: 20px auto;
+      position: relative;
+      border-radius: 15px;
+      border: 2px solid white;
+      overflow: hidden;
+    }
+
+    #mouse {
+      position: absolute;
+      font-size: 28px;
+      left: 10px;
+      top: 180px;
+    }
+
+    #goal {
+      position: absolute;
+      right: 10px;
+      top: 180px;
+      font-size: 26px;
+    }
+
+    .obstaculo {
+      width: 40px;
+      height: 40px;
+      background: crimson;
+      position: absolute;
+      border-radius: 8px;
+    }
   </style>
 </head>
 
@@ -65,15 +100,30 @@
   <button onclick="irPara('fase1')">Iniciar Missão</button>
 </div>
 
-<!-- FASE 1 -->
+<!-- FASE 1 - JOGO -->
 <div class="tela" id="fase1">
-  <div class="hud">❤️ Vida: 100 | 💖 Amor: +1000</div>
 
-  <h2>Fase 1 — O Começo</h2>
+  <h2>🐭 Fase 1 — Treinamento</h2>
+  <p>Leve o ratinho até o ❤️ sem bater!</p>
 
-  <p>"Desde o primeiro momento, eu te desejo."</p>
+  <div id="gameArea">
 
-  <button onclick="irPara('fase2')">Próxima Missão</button>
+    <div id="mouse">🐭🎖️</div>
+
+    <div class="obstaculo" style="top:120px; left:80px;"></div>
+    <div class="obstaculo" style="top:220px; left:200px;"></div>
+    <div class="obstaculo" style="top:80px; left:260px;"></div>
+
+    <div id="goal">❤️</div>
+
+  </div>
+
+  <p id="status"></p>
+
+  <button onclick="irPara('fase2')" id="btnNext" style="display:none;">
+    Próxima Missão
+  </button>
+
 </div>
 
 <!-- FASE 2 -->
@@ -84,7 +134,7 @@
 
   <p>"Pedro Estiloso Ativado"</p>
 
-  <img src="oculos.jpg" alt="Pedro estiloso">
+  <img src="oculos.jpg">
 
   <p>✨ Carisma +100</p>
 
@@ -99,7 +149,7 @@
 
   <p>"Nada me derruba quando você tá comigo"</p>
 
-  <img src="biceps.jpg" alt="Pedro forte">
+  <img src="biceps.jpg">
 
   <p>🔥 Resistência +200</p>
 
@@ -114,7 +164,7 @@
 
   <p>"Com você, tudo vira diversão"</p>
 
-  <img src="pixel.jpg" alt="Pedro gamer">
+  <img src="pixel.jpg">
 
   <p>🎮 Felicidade +999</p>
 
@@ -144,9 +194,113 @@
 
 <script>
 
+let mouse = null;
+let posX = 10;
+let posY = 180;
+
+document.addEventListener("keydown", mover);
+document.addEventListener("touchstart", tocarTela);
+
 function irPara(id) {
-  document.querySelectorAll('.tela').forEach(t => t.classList.remove('ativa'));
-  document.getElementById(id).classList.add('ativa');
+
+  document.querySelectorAll('.tela')
+    .forEach(t => t.classList.remove('ativa'));
+
+  document.getElementById(id)
+    .classList.add('ativa');
+
+  if (id === "fase1") {
+    setTimeout(iniciarJogo, 200);
+  }
+}
+
+function iniciarJogo() {
+  mouse = document.getElementById("mouse");
+  posX = 10;
+  posY = 180;
+  atualizar();
+}
+
+function mover(e) {
+
+  if (!mouse) return;
+
+  if (e.key === "ArrowUp") posY -= 15;
+  if (e.key === "ArrowDown") posY += 15;
+  if (e.key === "ArrowLeft") posX -= 15;
+  if (e.key === "ArrowRight") posX += 15;
+
+  atualizar();
+}
+
+function tocarTela(e) {
+
+  if (!mouse) return;
+
+  let y = e.touches[0].clientY;
+
+  if (y < window.innerHeight / 2) {
+    posY -= 20;
+  } else {
+    posY += 20;
+  }
+
+  posX += 15;
+
+  atualizar();
+}
+
+function atualizar() {
+
+  mouse.style.left = posX + "px";
+  mouse.style.top = posY + "px";
+
+  verificarColisao();
+}
+
+function verificarColisao() {
+
+  let mouseRect = mouse.getBoundingClientRect();
+  let goal = document.getElementById("goal");
+  let goalRect = goal.getBoundingClientRect();
+
+  let obstaculos = document.querySelectorAll(".obstaculo");
+
+  obstaculos.forEach(obs => {
+
+    let r = obs.getBoundingClientRect();
+
+    if (
+      mouseRect.right > r.left &&
+      mouseRect.left < r.right &&
+      mouseRect.bottom > r.top &&
+      mouseRect.top < r.bottom
+    ) {
+      resetar();
+    }
+
+  });
+
+  if (mouseRect.right > goalRect.left) {
+    venceu();
+  }
+}
+
+function resetar() {
+
+  posX = 10;
+  posY = 180;
+
+  document.getElementById("status").innerText =
+    "❌ Opa! Tenta de novo, soldado!";
+}
+
+function venceu() {
+
+  document.getElementById("status").innerText =
+    "🏆 Treinamento completo!";
+
+  document.getElementById("btnNext").style.display = "inline-block";
 }
 
 function mostrarMensagem() {
