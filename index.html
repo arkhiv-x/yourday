@@ -52,11 +52,10 @@ color:#b8c1c8;
 
 /* MAPA */
 
-#gameBox{
+.gameBox{
 width:100%;
 height:82vh;
 margin:6px auto;
-background:url("fundo1.png") center/cover no-repeat;
 position:relative;
 overflow:hidden;
 }
@@ -128,7 +127,6 @@ background:#3b4a50;
 <div class="tela ativa" id="inicio">
 
 <h1>🎮 Missão: Amor Infinito</h1>
-
 <p>Soldado Pedro, você está pronto?</p>
 
 <button onclick="irPara('fase1')">Iniciar Missão</button>
@@ -141,10 +139,10 @@ background:#3b4a50;
 <div class="hud">❤️ Vida: 100 | 💖 Amor: +1000</div>
 
 <h2>Fase 1 — O Começo</h2>
-
 <p>"Desde o primeiro momento, eu te desejo."</p>
 
-<div id="gameBox">
+<div class="gameBox" id="box1"
+style="background:url('fundo1.png') center/cover no-repeat;">
 
 <div id="mouse"></div>
 <div id="goal"></div>
@@ -163,9 +161,9 @@ background:#3b4a50;
 
 </div>
 
-<p id="msg"></p>
+<p id="msg1"></p>
 
-<button id="nextBtn" style="display:none"
+<button id="next1" style="display:none"
 onclick="irPara('fase2')">Próxima Missão</button>
 
 </div>
@@ -176,17 +174,38 @@ onclick="irPara('fase2')">Próxima Missão</button>
 <div class="hud">🔥 Resistência: MAX</div>
 
 <h2>Fase 2 — Juntos é Mais Forte</h2>
-
 <p>"Mesmo nos dias difíceis, você esteve aqui"</p>
 
-<button onclick="irPara('presente')">Continuar</button>
+<div class="gameBox" id="box2"
+style="background:url('fundo2.png') center/cover no-repeat;">
+
+<div id="mouse2"></div>
+<div id="goal2"></div>
+
+<div class="obst move" id="m1"></div>
+<div class="obst move" id="m2"></div>
+
+</div>
+
+<div id="controls">
+
+<div class="ctrl" ontouchstart="left2()">◀</div>
+<div class="ctrl" ontouchstart="up2()">▲</div>
+<div class="ctrl" ontouchstart="right2()">▶</div>
+
+</div>
+
+<p id="msg2"></p>
+
+<button id="next2" style="display:none"
+onclick="irPara('presente')">Continuar</button>
 
 </div>
 
 <!-- PRESENTE -->
 <div class="tela" id="presente">
 
-<h2>🎁 Recompensa Desbloqueada</h2>
+<h2>🎁 Recompensa</h2>
 
 <img src="oculos.jpg" style="max-width:70%">
 
@@ -197,152 +216,175 @@ onclick="irPara('fase2')">Próxima Missão</button>
 
 </div>
 
-<!-- FASE 3 -->
-<div class="tela" id="fase3">
-
-<div class="hud">🐱 Companheiros Ativos</div>
-
-<h2>Fase 3 — Guardiões</h2>
-
-<p>Proteja Tem, Sol e Byte!</p>
-
-<img src="biceps.jpg" style="max-width:70%">
-
-<p>🔥 Resistência +200</p>
-
-<button onclick="irPara('fase4')">Avançar</button>
-
-</div>
-
-<!-- FASE 4 -->
-<div class="tela" id="fase4">
-
-<div class="hud">🎖️ Modo Guerreiro</div>
-
-<h2>Fase 4 — O Guerreiro</h2>
-
-<p>"Mesmo cansado, você volta para casa."</p>
-
-<img src="pixel.jpg" style="max-width:70%">
-
-<p>🎮 Felicidade +999</p>
-
-<button onclick="irPara('final')">Última Missão</button>
-
-</div>
-
 <!-- FINAL -->
 <div class="tela" id="final">
 
 <h1 style="color:#ff5ca8">🏆 Missão Concluída</h1>
 
-<h2 style="color:#ff9acb">Amor Infinito</h2>
-
-<p>
-Amor,<br><br>
-
-Obrigada por estar comigo nos piores e melhores momentos.<br>
-Você é meu orgulho, minha casa, meu melhor amigo.<br><br>
-
-Meus parabéns e feliz aniversário 💖<br><br>
-
-— V.P.S 😎
-</p>
-
-<button style="background:#ff5ca8;color:white"
-onclick="alert('Eu te amo para sempre ❤️‍🩹')">💌 Mensagem Secreta</button>
+<p>Te amo pra sempre 💖</p>
 
 </div>
 
 <script>
 
-let x=180;
-let y=480;
+/* -------- FASE 1 -------- */
+
+let x=180,y=480;
 const speed=18;
 let mouse=null;
 
-function irPara(id){
-
-document.querySelectorAll('.tela')
-.forEach(t=>t.classList.remove('ativa'));
-
-document.getElementById(id)
-.classList.add('ativa');
-
-if(id==="fase1"){
-setTimeout(init,200);
-}
-}
-
-function init(){
+function init1(){
 
 mouse=document.getElementById("mouse");
-
-x=180;
-y=480;
-
-update();
+x=180;y=480;
+update1();
 }
 
-function left(){x-=speed;update();}
-function right(){x+=speed;update();}
-function up(){y-=speed;update();}
+function left(){x-=speed;update1();}
+function right(){x+=speed;update1();}
+function up(){y-=speed;update1();}
 
-function update(){
-
-if(x<0)x=0;
-if(x>window.innerWidth-50)x=window.innerWidth-50;
-if(y<0)y=0;
-if(y>window.innerHeight-200)y=window.innerHeight-200;
+function update1(){
 
 mouse.style.left=x+"px";
 mouse.style.top=y+"px";
 
-check();
+check1();
 }
 
-function check(){
+function check1(){
 
 const m=mouse.getBoundingClientRect();
 const g=document.getElementById("goal").getBoundingClientRect();
 
-document.querySelectorAll(".obst").forEach(o=>{
+document.querySelectorAll("#box1 .obst").forEach(o=>{
 
 const r=o.getBoundingClientRect();
 
-if(
-m.right>r.left &&
-m.left<r.right &&
-m.bottom>r.top &&
-m.top<r.bottom
-){
-reset();
-}
+if(hit(m,r))reset1();
 
 });
 
-if(m.top<g.bottom){
-win();
+if(m.top<g.bottom)win1();
 }
 
+function reset1(){
+
+x=180;y=480;
+document.getElementById("msg1").innerText="❌ Tenta de novo 💖";
 }
 
-function reset(){
+function win1(){
 
-x=180;
-y=480;
-
-document.getElementById("msg")
-.innerText="❌ Tenta de novo, amor 💖";
+document.getElementById("msg1").innerText="🏆 Concluído!";
+document.getElementById("next1").style.display="inline-block";
 }
 
-function win(){
+/* -------- FASE 2 -------- */
 
-document.getElementById("msg")
-.innerText="🏆 Missão concluída!";
+let x2=180,y2=480;
+let mouse2=null;
 
-document.getElementById("nextBtn")
-.style.display="inline-block";
+let dir1=1,dir2=-1;
+
+function init2(){
+
+mouse2=document.getElementById("mouse2");
+
+document.getElementById("mouse2").style=
+"width:42px;height:42px;background:url('ratinho.png') center/contain no-repeat;position:absolute;";
+
+document.getElementById("goal2").style=
+"width:36px;height:36px;background:url('coracao.png') center/contain no-repeat;position:absolute;top:10px;left:50%;transform:translateX(-50%);";
+
+x2=180;y2=480;
+
+document.getElementById("m1").style="top:200px;left:50px;";
+document.getElementById("m2").style="top:350px;left:200px;";
+
+moveObs();
+update2();
+}
+
+function left2(){x2-=speed;update2();}
+function right2(){x2+=speed;update2();}
+function up2(){y2-=speed;update2();}
+
+function update2(){
+
+mouse2.style.left=x2+"px";
+mouse2.style.top=y2+"px";
+
+check2();
+}
+
+function moveObs(){
+
+let o1=document.getElementById("m1");
+let o2=document.getElementById("m2");
+
+let p1=parseInt(o1.style.left);
+let p2=parseInt(o2.style.left);
+
+if(p1>260||p1<20)dir1*=-1;
+if(p2>260||p2<20)dir2*=-1;
+
+o1.style.left=(p1+dir1*3)+"px";
+o2.style.left=(p2+dir2*2)+"px";
+
+setTimeout(moveObs,40);
+}
+
+function check2(){
+
+const m=mouse2.getBoundingClientRect();
+const g=document.getElementById("goal2").getBoundingClientRect();
+
+["m1","m2"].forEach(id=>{
+
+const r=document.getElementById(id).getBoundingClientRect();
+
+if(hit(m,r))reset2();
+
+});
+
+if(m.top<g.bottom)win2();
+}
+
+function reset2(){
+
+x2=180;y2=480;
+document.getElementById("msg2").innerText="❌ Cuidado!";
+}
+
+function win2(){
+
+document.getElementById("msg2").innerText="🏆 Você conseguiu!";
+document.getElementById("next2").style.display="inline-block";
+}
+
+/* -------- GERAL -------- */
+
+function hit(a,b){
+
+return(
+a.right>b.left &&
+a.left<b.right &&
+a.bottom>b.top &&
+a.top<b.bottom
+);
+
+}
+
+function irPara(id){
+
+document.querySelectorAll(".tela")
+.forEach(t=>t.classList.remove("ativa"));
+
+document.getElementById(id).classList.add("ativa");
+
+if(id==="fase1")setTimeout(init1,200);
+if(id==="fase2")setTimeout(init2,200);
 }
 
 </script>
