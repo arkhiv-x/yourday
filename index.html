@@ -10,8 +10,8 @@
 body{
 margin:0;
 font-family:Arial;
-background:#050d14;
-color:white;
+background:#0a1116;
+color:#dfe6e9;
 text-align:center;
 }
 
@@ -29,35 +29,33 @@ box-sizing:border-box;
 /* BOTÕES */
 
 button{
-padding:12px 20px;
+padding:12px 22px;
 border:none;
-border-radius:12px;
-background:#ff5ca8;
-color:white;
-font-size:17px;
+border-radius:10px;
+background:#2f3e46;
+color:#e0e0e0;
+font-size:16px;
 margin-top:12px;
+border:1px solid #5a6f73;
 }
 
 /* HUD */
 
 .hud{
-background:rgba(0,0,0,0.6);
+background:rgba(20,30,35,0.7);
 padding:8px;
-border-radius:10px;
-margin-bottom:5px;
-font-size:14px;
+border-radius:8px;
+margin-bottom:6px;
+font-size:13px;
+color:#b8c1c8;
 }
 
 /* MAPA */
 
 #gameBox{
-width:95%;
-max-width:400px;
-height:75vh;
-max-height:520px;
-margin:10px auto;
-border-radius:15px;
-border:2px solid #fff;
+width:100%;
+height:82vh;
+margin:6px auto;
 background:url("fundo1.png") center/cover no-repeat;
 position:relative;
 overflow:hidden;
@@ -66,11 +64,11 @@ overflow:hidden;
 /* PERSONAGEM */
 
 #mouse{
-width:40px;
-height:40px;
+width:42px;
+height:42px;
 background:url("ratinho.png") center/contain no-repeat;
 position:absolute;
-bottom:10px;
+bottom:12px;
 left:50%;
 transform:translateX(-50%);
 }
@@ -78,11 +76,11 @@ transform:translateX(-50%);
 /* OBJETIVO */
 
 #goal{
-width:34px;
-height:34px;
+width:36px;
+height:36px;
 background:url("coracao.png") center/contain no-repeat;
 position:absolute;
-top:8px;
+top:10px;
 left:50%;
 transform:translateX(-50%);
 }
@@ -90,8 +88,8 @@ transform:translateX(-50%);
 /* OBSTACULOS */
 
 .obst{
-width:50px;
-height:20px;
+width:52px;
+height:22px;
 background:url("obstaculo.png") center/contain no-repeat;
 position:absolute;
 }
@@ -101,19 +99,24 @@ position:absolute;
 #controls{
 display:flex;
 justify-content:center;
-gap:25px;
-margin-top:8px;
+gap:22px;
+margin-top:6px;
 }
 
 .ctrl{
-width:60px;
-height:60px;
-background:#0c1b27;
-border:2px solid #fff;
+width:58px;
+height:58px;
+background:#1c262b;
+border:1px solid #6c7a80;
 border-radius:50%;
-font-size:26px;
-line-height:56px;
+font-size:24px;
+line-height:54px;
+color:#dfe6e9;
 user-select:none;
+}
+
+.ctrl:active{
+background:#3b4a50;
 }
 
 </style>
@@ -124,9 +127,9 @@ user-select:none;
 <!-- INICIO -->
 <div class="tela ativa" id="inicio">
 
-<h1>🎮 TRANSFORLOVE</h1>
+<h1>🎮 Missão: Amor Infinito</h1>
 
-<p>Campo de treinamento militar 💖</p>
+<p>Soldado Pedro, você está pronto?</p>
 
 <button onclick="irPara('fase1')">Iniciar Missão</button>
 
@@ -135,19 +138,20 @@ user-select:none;
 <!-- FASE 1 -->
 <div class="tela" id="fase1">
 
-<div class="hud">🐭 Treinamento Básico</div>
+<div class="hud">❤️ Vida: 100 | 💖 Amor: +1000</div>
 
-<p>Chegue no ❤️ sem bater</p>
+<h2>Fase 1 — O Começo</h2>
+
+<p>"Desde o primeiro momento, eu te desejo."</p>
 
 <div id="gameBox">
 
 <div id="mouse"></div>
-
 <div id="goal"></div>
 
-<div class="obst" style="top:160px;left:50px"></div>
-<div class="obst" style="top:260px;left:230px"></div>
-<div class="obst" style="top:340px;left:120px"></div>
+<div class="obst" style="top:160px;left:40px"></div>
+<div class="obst" style="top:300px;left:220px"></div>
+<div class="obst" style="top:420px;left:120px"></div>
 
 </div>
 
@@ -162,31 +166,49 @@ user-select:none;
 <p id="msg"></p>
 
 <button id="nextBtn" style="display:none"
-onclick="irPara('fase2')">Continuar</button>
+onclick="irPara('fase2')">Próxima Missão</button>
 
 </div>
 
 <!-- FASE 2 -->
 <div class="tela" id="fase2">
 
-<h2>😎 Skin Rara</h2>
+<div class="hud">🔥 Resistência: MAX</div>
 
-<img src="oculos.jpg" style="max-width:65%">
+<h2>Fase 2 — Juntos é Mais Forte</h2>
 
-<p>Carisma +100</p>
+<p>"Mesmo nos dias difíceis, você esteve aqui"</p>
 
-<button onclick="abrirPresente('fase3')">🎁 Abrir Presente</button>
+<button onclick="irPara('presente')">Continuar</button>
+
+</div>
+
+<!-- PRESENTE -->
+<div class="tela" id="presente">
+
+<h2>🎁 Recompensa Desbloqueada</h2>
+
+<img src="oculos.jpg" style="max-width:70%">
+
+<p>Pedro Estiloso Ativado 😎</p>
+<p>✨ Carisma +100</p>
+
+<button onclick="irPara('fase3')">Continuar</button>
 
 </div>
 
 <!-- FASE 3 -->
 <div class="tela" id="fase3">
 
-<h2>💪 Força Máxima</h2>
+<div class="hud">🐱 Companheiros Ativos</div>
 
-<img src="biceps.jpg" style="max-width:65%">
+<h2>Fase 3 — Guardiões</h2>
 
-<p>Resistência +200</p>
+<p>Proteja Tem, Sol e Byte!</p>
+
+<img src="biceps.jpg" style="max-width:70%">
+
+<p>🔥 Resistência +200</p>
 
 <button onclick="irPara('fase4')">Avançar</button>
 
@@ -195,38 +217,48 @@ onclick="irPara('fase2')">Continuar</button>
 <!-- FASE 4 -->
 <div class="tela" id="fase4">
 
-<h2>🕶️ Gamer Supremo</h2>
+<div class="hud">🎖️ Modo Guerreiro</div>
 
-<img src="pixel.jpg" style="max-width:65%">
+<h2>Fase 4 — O Guerreiro</h2>
 
-<p>Felicidade +999</p>
+<p>"Mesmo cansado, você volta para casa."</p>
 
-<button onclick="irPara('final')">Final</button>
+<img src="pixel.jpg" style="max-width:70%">
+
+<p>🎮 Felicidade +999</p>
+
+<button onclick="irPara('final')">Última Missão</button>
 
 </div>
 
 <!-- FINAL -->
 <div class="tela" id="final">
 
-<h1>🏆 Missão Concluída</h1>
+<h1 style="color:#ff5ca8">🏆 Missão Concluída</h1>
+
+<h2 style="color:#ff9acb">Amor Infinito</h2>
 
 <p>
-Pedro, você é meu herói.<br>
-Te amo pra sempre 💖<br><br>
+Amor,<br><br>
 
-— Vitória
+Obrigada por estar comigo nos piores e melhores momentos.<br>
+Você é meu orgulho, minha casa, meu melhor amigo.<br><br>
+
+Meus parabéns e feliz aniversário 💖<br><br>
+
+— V.P.S 😎
 </p>
 
-<button onclick="alert('Sempre vou lutar ao seu lado 🐭❤️')">💌</button>
+<button style="background:#ff5ca8;color:white"
+onclick="alert('Eu te amo para sempre ❤️‍🩹')">💌 Mensagem Secreta</button>
 
 </div>
 
 <script>
 
-let x=170;
-let y=430;
+let x=180;
+let y=480;
 const speed=18;
-
 let mouse=null;
 
 function irPara(id){
@@ -246,8 +278,8 @@ function init(){
 
 mouse=document.getElementById("mouse");
 
-x=170;
-y=430;
+x=180;
+y=480;
 
 update();
 }
@@ -259,9 +291,9 @@ function up(){y-=speed;update();}
 function update(){
 
 if(x<0)x=0;
-if(x>360)x=360;
+if(x>window.innerWidth-50)x=window.innerWidth-50;
 if(y<0)y=0;
-if(y>480)y=480;
+if(y>window.innerHeight-200)y=window.innerHeight-200;
 
 mouse.style.left=x+"px";
 mouse.style.top=y+"px";
@@ -297,27 +329,20 @@ win();
 
 function reset(){
 
-x=170;
-y=430;
+x=180;
+y=480;
 
 document.getElementById("msg")
-.innerText="❌ Tenta de novo, soldado!";
+.innerText="❌ Tenta de novo, amor 💖";
 }
 
 function win(){
 
 document.getElementById("msg")
-.innerText="🏆 Treinamento concluído!";
+.innerText="🏆 Missão concluída!";
 
 document.getElementById("nextBtn")
 .style.display="inline-block";
-}
-
-function abrirPresente(fase){
-
-alert("🎁 Presente desbloqueado!");
-
-irPara(fase);
 }
 
 </script>
